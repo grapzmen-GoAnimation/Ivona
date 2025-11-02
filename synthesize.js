@@ -15,8 +15,4 @@ async function generateSpeech(message, voice)
 						r.on("data", (d) => buffers.push(d));
 						r.on("end", () => res(Buffer.concat(buffers)));
 						r.on("error", rej);
-					}
-						}, (r) => {
-							return r;
-						});
 }
