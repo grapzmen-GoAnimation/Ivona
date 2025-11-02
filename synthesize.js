@@ -1,24 +1,21 @@
 async function generateSpeech(message, voice)
 {
-  					let fakeEmail = [];
-						for (let c = 0; c < 15; c++) fakeEmail.push(~~(65 + Math.random() * 26));
-						const email = `${String.fromCharCode.apply(null, fakeEmail)}@gmail.com`;
-	
-						const q = new URLSearchParams({						
-							msg: message,
-							voice: voice,
-							email
-						}).toString();
-						
-						$.get({
-							hostname: "api.voiceforge.com",
-							path: `/swift_engine?${q}`,
-							headers: { 
-								'User-Agent': 'just_audio/2.7.0 (Linux;Android 11) ExoPlayerLib/2.15.0',
-								HTTP_X_API_KEY: '8b3f76a8539',
-								'Accept-Encoding': 'identity',
-								'Icy-Metadata': '1',
-							 }
+				var q = qs.encode({
+					voice: voice.arg,
+					text: text,
+				});
+				http.get(
+					{
+						host: "192.3.81.127",
+						port: "7774",
+						path: `/synthesize?${q}`,
+					},
+					(r) => {
+						var buffers = [];
+						r.on("data", (d) => buffers.push(d));
+						r.on("end", () => res(Buffer.concat(buffers)));
+						r.on("error", rej);
+					}
 						}, (r) => {
 							return r;
 						});
