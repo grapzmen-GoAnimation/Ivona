@@ -1,4 +1,4 @@
-async function generateSpeech(message, voice)
+async function generateSpeech(voice, text)
 {
 				var q = qs.encode({
 					voice: voice.arg,
